@@ -114,7 +114,9 @@ body {
   line-height: 24px;
   color: #595959;
 }
-
+.education-section {
+  margin: 40px 0;
+}
 .education-position {
   font-style: normal;
   font-weight: bold;
