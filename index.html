@@ -1,181 +1,156 @@
-﻿<html>
-<script src="sha1.js"></script>
-<script language="JavaScript">
-    <!--
-function dump(obj) {
-    var out = "";
-    if(obj && typeof(obj) == "object"){
-        for (var i in obj) {
-            out += i + ": " + obj[i] + "\n";
-        }
-    } else {
-        out = obj;
-    }
-    return (out);
-}
-function Hex2Bin(hex){
-	var bytes = [];
-	// alert(hex.length.toString());
-	// alert(hex);
-	for(var i=0; i< hex.length-1; i+=2){
-    bytes.push(parseInt(hex.substr(i, 2), 16));
-	}
-	// alert(bytes.length.toString());
-	return String.fromCharCode.apply(String, bytes);
-}
-function Bin2Hex(str){
-	var o="";
-	var t;
-	// alert(str.length.toString());
-	for(var i=0; i< str.length; i+=1){
-		t=str.charCodeAt(i);
-		if (t<16)
-		o+="0"+t.toString(16)
-	else
-	o+=t.toString(16);
-	}
-	// alert(o.length.toString());
-	return o;
-}
-function xorstr(x1,x2){
-	var o="";
-	for (var i=0;i<x1.length;i++)
-	{
-		 o+=String.fromCharCode(x1.charCodeAt(i)^x2.charCodeAt(i));
-	}
-	return o;
-}
-
-function utf8_to_b64( str ) {
-  return window.btoa( str );
-}
-
-function b64_to_utf8( str ) {
-  return window.atob( str );
-}
-function inttostr(x){
-	var t="";
-	for (var i =0;i<4;i++)
-	{
-		t+=String.fromCharCode((x >> (i*8))&0xff);
-	}
-	return t;
-}
-
-function encode()
-{
-	
-	var lstxt =document.getElementById("crypted").value.split("\n");
-	var pw=document.getElementById("mypass").value;
-	var out="";
-	var tm;
-	var txt;
-	var cr="";
-	if (pw=="") return;
-	// alert(lstxt.length);
-	for ( i=0;i<lstxt.length;i++)
-	{
-	if (i!=0) cr="\n";	
-	tm=parseInt((new Date()).getTime()/1000);
-	tm=inttostr(tm);
-	txt=lstxt[i];
-	var hashkey=Hex2Bin(Sha1.hash(tm+pw));
-	var hashtxt=Hex2Bin(Sha1.hash(txt));
-	var sbox=xorstr(hashkey,hashtxt);
-	while (sbox.length<txt.length) sbox+=Hex2Bin(Sha1.hash(sbox));
-	sbox=sbox.substring(0,txt.length);
-	var crypted=xorstr(sbox,txt);
-	out+=cr+utf8_to_b64(tm+hashtxt+crypted);
-	}
-	// alert(tm.toString());
-	
-	document.getElementById("decoded").value=out;
-}
-
-function decode()
-{
-
-	var txt =document.getElementById("crypted").value.split("\n");//.charCodeAt(0)
-	var mypass=document.getElementById("mypass").value;
-	var out="";
-	var i;
-	var t0;
-	var sz=txt.length;
-	if (mypass=="") return;
-	for ( i=0;i<sz;i++)
-		// i=0;
-	{
-		var cr="\n";
-		if (i==0) cr="";
-	if (txt[i]=="") continue;
-	t0="";
-	try{
-	t0=b64_to_utf8(txt[i]);
-	}
-	catch (err)
-	 {
-		out+=cr+txt[i];
-		continue;
-		}
-	var t1=t0.substring(0,4);
-	var cry=t0.substring(4);
-	
-	
-	
-	
-	var t2=t1.charCodeAt(0)+t1.charCodeAt(1)*256+t1.charCodeAt(2)*256*256+t1.charCodeAt(3)*256*256*256;
-	
-	var crtxt=cry.substring(20);
-	var crchk=cry.substring(0,20);
-
-	var ss=t1+mypass;
-	
-	var hash = (Sha1.hash(ss.toString()).toString());
-	
-	var sbox=xorstr(Hex2Bin(hash),crchk)
-	while (sbox.length<crtxt.length)
-	{
-		sbox+=Hex2Bin(Sha1.hash(sbox))
-	}
-	sbox=sbox.substring(0,crtxt.length)
-	
-	var decry=xorstr(sbox,crtxt);
-	if (Sha1.hash(decry)==Bin2Hex(crchk))
-	out+=cr+decry;
-else
-	out+=cr+$txt[1];
-	
-	}
-	document.getElementById("decoded").value=out;
-}
-    -->
-    </script>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-<title>Test head</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<form id="myform">
-<h1>Cool 3.2</h1>
-Text:<br>
-<textarea rows="10" cols="100" name="comment" placeholder="Enter text" 
-      required form="myform"  id="crypted"></textarea>
+    <!-- full -->
+    <div class="main-content-section">
+        <!-- main -->
+        <div>
+            <!-- about me -->
+            <div class="about-me-section">
+                <h2 class="about-me-prof">Front-End Developer</h2>
 
-<br>
-Pass:<br>
+                <h1>Anton Chornyi</h1>
 
-<input type="password" id="mypass" >
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
+                    accumsan lacus vel facilisis.
+                </p>
+            </div>
 
-<button type="button"  onClick="decode(); return true;">Decode</button>
-<button type="button"  onClick="encode(); return true;">Encode</button>
-<br><br>
-<textarea rows="10" cols="100"  
-      required form="myform"  id="decoded"></textarea>
-</form>
-<p>
+            <div class="projects-section">
+                <h3>Projects</h3>
+                <ol>
+                    <li class="proj-item">
+                        <a href="https://hellenglish.goit.global/">https://hellenglish.goit.global/</a>
+                        <span>......</span>
+                        <span></span>[ HTML5, CSS3 ] </span>
+                    </li>
+                    <li>
+                        <a href="https://cryptohub.goit.global/">https://cryptohub.goit.global/</a>
+                        <span>.......</span>
+                        <span></span>[ JavaScript ]</span>
+                    </li>
+                    <li>
+                        <a href="https://kidslike.goit.global/">https://kidslike.goit.global/</a>
+                        <span>...........</span>
+                        <span></span>[ React.js, Node.js ]</span>
+                    </li>
+                </ol>
+            </div>
+            <!-- expirience -->
+            <div class="experience-section">
+                <h3>Work Experience</h3>
+                <!-- comp 1-->
+                <div>
+                    <h4>Front-End Developer Freelance </h4>
+                    <p>September 2019 - up to now | Country</p>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. </li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                        <li>Risus commodo viverra maecenas. </li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. </li>
+                    </ul>
+                </div>
+                <!-- comp 2-->
+                <div>
+                    <h4> Manager Roga & Kopyta New</h4>
+                    <p>March 2015 - October 2018 | Country</p>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod labore et dolore
+                            magna aliqua. </li>
+                        <li>Quis ipsum suspendisse ultrices gravida.</li>
+                        <li>Risus commodo viverra maecenas. </li>
 
-</p>
+                    </ul>
+                </div>
+                <!-- comp 3-->
+                <div>
+                    <h4>Manager Roga & Kopyta LLC</h4>
+                    <p>June 2014 - February 2015 | Country</p>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
+                        <li>Quis ipsum suspendisse ultrices gravida.</li>
+                        <li>Risus commodo viverra maecenas. </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- Education -->
+            <div class="education-section">
+                <h3>Education</h3>
+                <!-- educ 1-->
+                <div>
+                    <h4>National University of Radioelectronics</h4>
+                    <h4>Management</h4>
+                    <p>September 2009 - June 2014 | Country</p>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- left -->
+        <aside class="sidebar-section">
+            <!-- foto -->
+            <img src="img/photo.jpg" alt="my foto">
+            <!-- contacts -->
+            <div class="sidebar-contacts">
+                <h3 class="sidebar-title">Contacts</h3>
+                <div>
+                    <span class="sidebar-contacts-type"> C:</span>
+                    <a class="sidebar-contacts-link" href="tel:+77777777777">+7 777 777 77 77</a>
+                </div>
+                <div>
+                    <span class="sidebar-contacts-type">E:</span>
+                    <a class="sidebar-contacts-link" href=" mailto:chornyiav@gmail.com">chornyiav@gmail.com</a>
+
+                </div>
+
+
+            </div>
+            <!-- tech -->
+            <div class="sidebar-tech">
+                <h3 class="sidebar-title">Tech Skills</h3>
+                <ul class="sidebar-tech-list">
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">HTML5</span></li>
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">CSS3</span></li>
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">GIT</span></li>
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">WebPack</span></li>
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">JavaScript</span></li>
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">React.js</span></li>
+                    <li class="sidebar-tech-item"><span class="sidebar-tech-item-text">Node.js</span></li>
+                </ul>
+            </div>
+            <!-- Soft Skills -->
+            <div class="sidebar-soft">
+                <h3 class="sidebar-title">Soft Skills</h3>
+                <ul class="sidebar-tech-list">
+                    <li><span>Scrum</span></li>
+                    <li><span>Agile</span></li>
+                    <li><span>GTD</span></li>
+                    <li><span>Teamwork</span></li>
+                </ul>
+            </div>
+
+
+        </aside>
+    </div>
+
 </body>
+
 </html>
-
-
