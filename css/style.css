@@ -1,0 +1,84 @@
+body {
+  background-color: #e5e5e5;
+  font-family: "Montserrat", sans-serif;
+}
+
+.about-me-prof {
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+}
+
+.about-me-section {
+  /* margin: 50px 70px 100px 30px; */
+}
+.main-content-section {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 1200px;
+  background: white;
+  margin: 40px auto;
+}
+
+.projects-section {
+}
+.experience-section {
+}
+.education-section {
+}
+/* sidebar section */
+.sidebar-section {
+  padding: 40px 0;
+  background: #1e2939;
+  color: white;
+  width: 370px;
+}
+.sidebar-contacts,
+.sidebar-tech,
+.sidebar-soft {
+  margin: 50px 0 0 40px;
+}
+
+.sidebar-title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 27px;
+  margin-bottom: 10px;
+}
+.sidebar-contacts-type {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  margin-right: 7px;
+}
+.sidebar-contacts-link {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #565e6a;
+}
+.sidebar-tech-list {
+  padding-left: 17px;
+}
+.sidebar-tech-item {
+  color: #fb6d3a;
+}
+
+.sidebar-tech-item-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+}
+.sidebar-tech-list li {
+  color: #fb6d3a;
+}
+.sidebar-tech-list li span {
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+}
